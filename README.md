@@ -642,13 +642,3 @@ Contributions are welcome! If you would like to add new features, improve existi
 
 ---
 
-## License
-
-*(Include your license information here, e.g., MIT License.)*
-```
-
----
-
-This README.md file contains detailed usage documentation for each function in the MCP server. You can add it directly to your GitHub repository to provide comprehensive guidance for users and contributors.
-
-Let me know if you need further modifications!
