@@ -1,8 +1,7 @@
-Below is a final version of the README.md file with detailed documentation for each tool. Unnecessary optional sections have been removed so you can copy and paste this directly into your GitHub repository.
 
 ---
 
-```markdown
+
 # MCP Server for ServiceNow
 
 The MCP Server for ServiceNow is a generic, modular, and extensible solution designed to enable integration with ServiceNow via the Model Context Protocol (MCP). It exposes a range of tools as APIs that can be used for diverse use cases, including ITSM, ITOM, SAM, HAM, an **Enhanced CMDB**, PPM, Employee Experience, Reporting, Analytics, dynamic tool registration, and workflow orchestration.
@@ -10,7 +9,7 @@ The MCP Server for ServiceNow is a generic, modular, and extensible solution des
 This solution is ideal for integrating ServiceNow with AI agents (e.g. through orchestration tools like n8n) or other external systems to automate processes such as access provisioning, incident management, asset lifecycle management, and much more.
 
 ---
-```
+
 ## Features
 
 - **Generic ServiceNow Client:**  
