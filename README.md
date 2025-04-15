@@ -1,68 +1,65 @@
-Below is a comprehensive README.md file designed for your GitHub repository. You can copy and paste this into your repository’s README.md file. It covers an overall overview, features, directory structure, installation instructions, usage, and details for each module.
+Below is a final version of the README.md file with detailed documentation for each tool. Unnecessary optional sections have been removed so you can copy and paste this directly into your GitHub repository.
 
 ---
 
 ```markdown
 # MCP Server for ServiceNow
 
-The MCP Server for ServiceNow is a generic, modular, and extensible solution designed to enable integration with ServiceNow via the Model Context Protocol (MCP). It exposes a range of tools as APIs that can be used for diverse use cases, including ITSM, ITOM, SAM, HAM, CMDB (with enhanced features), PPM, Employee Experience, Reporting, Analytics, dynamic tool registration, and workflow orchestration.
+The MCP Server for ServiceNow is a generic, modular, and extensible solution designed to enable integration with ServiceNow via the Model Context Protocol (MCP). It exposes a range of tools as APIs that can be used for diverse use cases, including ITSM, ITOM, SAM, HAM, an **Enhanced CMDB**, PPM, Employee Experience, Reporting, Analytics, dynamic tool registration, and workflow orchestration.
 
-This server is ideal for integrating ServiceNow with AI agents (such as those orchestrated via n8n) or other external systems to automate processes (e.g., automated access provisioning, incident management, asset lifecycle management, and more).
+This solution is ideal for integrating ServiceNow with AI agents (e.g. through orchestration tools like n8n) or other external systems to automate processes such as access provisioning, incident management, asset lifecycle management, and much more.
 
 ---
-
+```
 ## Features
 
 - **Generic ServiceNow Client:**  
-  - Supports CRUD operations, query-based record retrieval, and uses both Basic Authentication & OAuth.
-  
+  Supports CRUD operations, query-based record retrieval, and both Basic Authentication & OAuth.
+
 - **Modular Architecture:**  
-  - Separate modules for ITSM, ITOM, SAM, HAM, CMDB (enhanced), PPM, Employee Experience, Reporting, Analytics, Dynamic Tools, and Workflow.
-  
+  Separate modules for ITSM, ITOM, SAM, HAM, Enhanced CMDB, PPM, Employee Experience, Reporting, Analytics, Dynamic Tools, and Workflow.
+
 - **Enhanced CMDB:**  
-  - Data validation, deduplication, relationship management, enrichment, and audit logging to ensure data integrity and support impact analysis.
-  
+  Incorporates data validation, deduplication, relationship management, enrichment, and audit logging to ensure data integrity.
+
 - **Dynamic Tool Registration:**  
-  - Register, deregister, and list dynamic tools at runtime.
-  
+  Allows registration, deregistration, and listing of dynamic tools at runtime.
+
 - **Workflow Orchestration:**  
-  - A dedicated workflow module to orchestrate multi-step processes (such as access provisioning), enabling intelligent decision-making and inter-agent communication.
-  
+  Provides a dedicated workflow module to coordinate complex multi-step processes.
+
 - **Rich Prompt Templates:**  
-  - Support for dynamic interactions using configurable prompt templates that can be enhanced with AI.
-  
-- **Optional Self-Service Dashboard:**  
-  - Built with FastAPI to enable visualization of reports and real-time monitoring.
+  Uses configurable prompt templates for dynamic interactions with AI agents.
 
 ---
-
+```
 ## Directory Structure
 
 
 mcp_servicenow/
 ├── main.py                     # Entry point for the MCP server; exposes all tools via MCP
-├── config.py                   # Configuration file for ServiceNow instance, authentication, etc.
-├── portal.py                   # (Optional) FastAPI-based dashboard for self-service reporting
+├── config.py                   # Configuration for ServiceNow instance and authentication
 ├── server/
 │   ├── __init__.py             # Package initializer for server modules
-│   ├── base.py                 # Common helper functions and error handling (e.g., data validation, update_comments)
+│   ├── base.py                 # Common helper functions and error handling
 │   ├── itsm.py                 # ITSM operations (Incident CRUD functions)
-│   ├── itom.py                 # ITOM operations (e.g., creating events)
-│   ├── sam.py                  # SAM operations (e.g., managing license records)
-│   ├── ham.py                  # HAM operations (Asset lifecycle management)
-│   ├── cmdb.py                 # **Enhanced** CMDB functions with validation, deduplication, relationships, enrichment, and audit logging
-│   ├── ppm.py                  # PPM operations (Project records)
-│   ├── employee_experience.py  # Employee Experience tools (e.g., feedback management)
-│   ├── reporting.py            # Reporting tools (e.g., incident and change reports)
-│   ├── analytics.py            # Analytics tools (trend prediction and anomaly detection)
+│   ├── itom.py                 # ITOM operations (creating events)
+│   ├── sam.py                  # SAM operations (managing license records)
+│   ├── ham.py                  # HAM operations (asset lifecycle management)
+│   ├── cmdb.py                 # **Enhanced** CMDB functions (validation, deduplication, relationships, enrichment, logging)
+│   ├── ppm.py                  # PPM operations (project records)
+│   ├── employee_experience.py  # Employee Experience tools (feedback management)
+│   ├── reporting.py            # Reporting tools (incident and change reports)
+│   ├── analytics.py            # Analytics tools (trend prediction, anomaly detection)
 │   ├── dynamic_tools.py        # Dynamic registration of new tools at runtime
 │   └── workflow.py             # Workflow orchestration for multi-step processes (e.g., access provisioning)
 ├── servicenow_client/
 │   ├── __init__.py             # Package initializer for ServiceNow client modules
-│   └── sn_client.py            # ServiceNow API client for CRUD, queries, Basic & OAuth authentication
+│   └── sn_client.py            # ServiceNow API client (CRUD, queries, Basic & OAuth support)
 └── prompts/
     ├── __init__.py             # Package initializer for prompt templates
-    └── templates.py            # Rich prompt templates for dynamic interactions with AI agents
+    └── templates.py            # Rich prompt templates for dynamic interactions
+
 
 ---
 
@@ -73,11 +70,11 @@ mcp_servicenow/
 - **Python 3.7 or higher**
 - Required libraries (install via pip):
   - `requests`
-  - `fastapi` (for the optional dashboard)
-  - `uvicorn` (for running the FastAPI server)
-  - MCP SDK dependencies (if not already bundled)
-  
-### Steps
+  - `fastapi` (if you choose to integrate any FastAPI-based interfaces later)
+  - `uvicorn`
+  - Any additional libraries required by the MCP SDK
+
+### Setup Instructions
 
 1. **Clone the Repository:**
 
@@ -86,121 +83,572 @@ mcp_servicenow/
    cd mcp-servicenow
    ```
 
-2. **Create a Virtual Environment (Recommended):**
+2. **Create and Activate a Virtual Environment:**
 
    ```bash
    python -m venv venv
-   source venv/bin/activate   # On Windows, use: venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install the Dependencies:**
+3. **Install Dependencies:**
+
+   Create a `requirements.txt` file with entries such as:
+   ```
+   requests
+   fastapi
+   uvicorn
+   ```
+   Then run:
 
    ```bash
    pip install -r requirements.txt
    ```
-   *(Create a `requirements.txt` file with the necessary packages, e.g., requests, fastapi, uvicorn.)*
 
 4. **Configure the Server:**
-   
+
    - Open `config.py` and update:
      - `SN_INSTANCE_URL` with your ServiceNow instance URL.
-     - Authentication details: set `SN_AUTH_METHOD` to either `"basic"` or `"oauth"` and provide the corresponding credentials.
+     - Set `SN_AUTH_METHOD` to either `"basic"` or `"oauth"`, and provide the corresponding credentials.
 
 5. **Run the MCP Server:**
 
    ```bash
    python main.py
    ```
-   This will start the MCP server using the standard I/O transport (ideal for development/testing).
-
-6. **(Optional) Run the Self-Service Dashboard:**
-
-   ```bash
-   python portal.py
-   ```
-   Access the dashboard at `http://localhost:8000` to view incident and change reports.
+   This will start the MCP server using standard I/O transport (ideal for development and testing).
 
 ---
 
-## Usage
+## Detailed Documentation – Interacting with the MCP Server
 
-### Interacting with the MCP Server
+The MCP server exposes its functionality as “tools” that are invoked by sending a JSON payload. Each tool represents an action (e.g., creating an incident, updating a CI, processing a workflow) and includes an input schema defining its parameters.
 
-The MCP server exposes various tools that can be invoked by AI agents or workflow orchestration tools. Below are some example tool names and their purpose:
+Below is detailed information for each category of tools.
 
-- **ITSM Tools:**
-  - `itsm_create_incident` – Create a new incident.
-  - `itsm_read_incident` – Retrieve an incident by its sys_id.
-  - `itsm_update_incident` – Update incident details.
-  - `itsm_delete_incident` – Delete an incident.
+---
 
-- **CMDB Tools (Enhanced):**
-  - `cmdb_create_ci` – Create a configuration item (CI) after validation.
-  - `cmdb_read_ci` – Read a CI record.
-  - `cmdb_update_ci` – Update CI data.
-  - `cmdb_delete_ci` – Delete a CI record.
-  - `cmdb_query_ci` – Perform advanced queries on CI records.
-  - `cmdb_deduplicate` – Identify potential duplicate CIs.
-  - `cmdb_add_relationship` – Add a relationship between two CIs.
-  - `cmdb_get_relationships` – Get relationships for a specific CI.
-  - `cmdb_enrich_ci` – Enrich CI records with additional external data.
+### 1. ITSM Tools
 
-- **Workflow Tools:**
-  - `workflow_process_access` – Orchestrate the multi-step access provisioning process (includes steps like fetching RITM details, role classification, and assignment).
+#### `itsm_create_incident`
+- **Purpose:** Creates a new ITSM incident in ServiceNow.
+- **Input Schema:**
+  - `short_description` (string, required)
+  - `caller_id` (string, required)
+  - `priority` (string, optional)
+- **Example:**
 
-- **Dynamic Tool Registration:**
-  - `register_tool` – Register a new tool dynamically.
-  - `deregister_tool` – Remove a tool.
-  - `list_registered_tools` – List all dynamically registered tools.
+  ```json
+  {
+    "name": "itsm_create_incident",
+    "arguments": {
+      "short_description": "Unable to access internal portal",
+      "caller_id": "user123",
+      "priority": "High"
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `create_incident()` to send a REST API call to ServiceNow, returning the incident's unique sys_id and confirmation details.
 
-- **Reporting and Analytics:**
-  - `report_generate_incident` – Generate an incident report.
-  - `report_generate_change` – Generate a change report.
-  - `analytics_predict_trends` – Predict incident trends.
-  - `analytics_anomaly_detection` – Detect anomalies in incident data.
+#### `itsm_read_incident`
+- **Purpose:** Retrieves details of an incident by sys_id.
+- **Input Schema:**
+  - `sys_id` (string, required)
+- **Example:**
 
-- **Employee Experience:**
-  - `ee_get_feedback` – Retrieve employee feedback records.
-  - `ee_create_feedback` – Create a new feedback record.
+  ```json
+  {
+    "name": "itsm_read_incident",
+    "arguments": {
+      "sys_id": "abc123xyz"
+    }
+  }
+  ```
+- **Details:**  
+  Uses `read_incident()` to perform a GET operation, returning incident data.
 
-### How to Invoke a Tool
+#### `itsm_update_incident`
+- **Purpose:** Updates an existing incident.
+- **Input Schema:**
+  - `sys_id` (string, required)
+  - `data` (object, required)
+- **Example:**
 
-Tools can be invoked using an MCP client (or via an orchestrator such as n8n). A typical call to a tool sends a message containing:
-- The `name` of the tool.
-- An `arguments` payload as a JSON object matching the tool’s input schema.
+  ```json
+  {
+    "name": "itsm_update_incident",
+    "arguments": {
+      "sys_id": "abc123xyz",
+      "data": {"comments": "Escalated to support.", "state": "In Progress"}
+    }
+  }
+  ```
+- **Details:**  
+  Calls `update_incident()` to update incident fields and logs the change.
 
-For example, to create an incident via the `itsm_create_incident` tool:
+#### `itsm_delete_incident`
+- **Purpose:** Deletes an incident by sys_id.
+- **Input Schema:**
+  - `sys_id` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "itsm_delete_incident",
+    "arguments": {
+      "sys_id": "abc123xyz"
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `delete_incident()` to remove the incident and logs the deletion.
+
+---
+
+### 2. Enhanced CMDB Tools
+
+#### `cmdb_create_ci`
+- **Purpose:** Creates a new Configuration Item (CI) record.
+- **Input Schema:**
+  - `name` (string, required)
+  - `ci_type` (string, required)
+  - Additional optional fields (e.g., manufacturer, location)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_create_ci",
+    "arguments": {
+      "name": "Web Server 01",
+      "ci_type": "Server",
+      "manufacturer": "Dell",
+      "location": "Data Center 1"
+    }
+  }
+  ```
+- **Details:**  
+  Calls `create_ci()` to validate and create the CI record in ServiceNow, logging the action for audit purposes.
+
+#### `cmdb_read_ci`
+- **Purpose:** Retrieves a CI record using its sys_id.
+- **Input Schema:**
+  - `sys_id` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_read_ci",
+    "arguments": {
+      "sys_id": "ci123abc"
+    }
+  }
+  ```
+- **Details:**  
+  Executes `read_ci()` and returns the CI’s data.
+
+#### `cmdb_update_ci`
+- **Purpose:** Updates an existing CI record.
+- **Input Schema:**
+  - `sys_id` (string, required)
+  - `data` (object, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_update_ci",
+    "arguments": {
+      "sys_id": "ci123abc",
+      "data": {"location": "Data Center 2", "status": "Active"}
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `update_ci()` to update and log changes.
+
+#### `cmdb_delete_ci`
+- **Purpose:** Deletes a CI record.
+- **Input Schema:**
+  - `sys_id` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_delete_ci",
+    "arguments": {
+      "sys_id": "ci123abc"
+    }
+  }
+  ```
+- **Details:**  
+  Calls `delete_ci()` to remove the record and logs the deletion.
+
+#### `cmdb_query_ci`
+- **Purpose:** Queries CI records based on custom criteria.
+- **Input Schema:**
+  - `query` (string, optional)
+  - `limit` (number, optional)
+  - `offset` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_query_ci",
+    "arguments": {
+      "query": "ci_type=Server",
+      "limit": 50,
+      "offset": 0
+    }
+  }
+  ```
+- **Details:**  
+  Uses `query_ci()` to return a list of CI records that match the query.
+
+#### `cmdb_deduplicate`
+- **Purpose:** Scans for duplicate CI records.
+- **Input Schema:**  
+  No arguments required.
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_deduplicate",
+    "arguments": {}
+  }
+  ```
+- **Details:**  
+  Executes `deduplicate_ci()` and returns any potential duplicates.
+
+#### `cmdb_add_relationship`
+- **Purpose:** Adds a relationship between two CIs.
+- **Input Schema:**
+  - `ci_sys_id` (string, required)
+  - `related_ci_sys_id` (string, required)
+  - `relationship_type` (string, optional; default "Depends on")
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_add_relationship",
+    "arguments": {
+      "ci_sys_id": "ci123abc",
+      "related_ci_sys_id": "ci456def",
+      "relationship_type": "Contains"
+    }
+  }
+  ```
+- **Details:**  
+  Calls `add_relationship()` to create the relationship and logs the operation.
+
+#### `cmdb_get_relationships`
+- **Purpose:** Retrieves relationships for a specific CI.
+- **Input Schema:**
+  - `ci_sys_id` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_get_relationships",
+    "arguments": {
+      "ci_sys_id": "ci123abc"
+    }
+  }
+  ```
+- **Details:**  
+  Executes `get_relationships()` to return all child relationships.
+
+#### `cmdb_enrich_ci`
+- **Purpose:** Enriches a CI record with additional data.
+- **Input Schema:**
+  - `sys_id` (string, required)
+  - `enrichment_data` (object, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "cmdb_enrich_ci",
+    "arguments": {
+      "sys_id": "ci123abc",
+      "enrichment_data": {"warranty_expiration": "2025-12-31", "vendor": "Dell"}
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `enrich_ci()` to update the record with extra information and logs the enrichment.
+
+---
+
+### 3. ITOM, SAM, HAM, and PPM Tools
+
+#### `itom_create_event`
+- **Purpose:** Creates an ITOM event (e.g., system alert).
+- **Input Schema:**
+  - `event_description` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "itom_create_event",
+    "arguments": {
+      "event_description": "Server CPU usage exceeds threshold"
+    }
+  }
+  ```
+- **Details:**  
+  Calls `create_event()` to record an ITOM event in ServiceNow.
+
+#### `sam_create_license`
+- **Purpose:** Creates a SAM license record.
+- **Input Schema:**
+  - `license_name` (string, required)
+  - `assigned_to` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "sam_create_license",
+    "arguments": {
+      "license_name": "Adobe Creative Cloud",
+      "assigned_to": "marketing_team"
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `create_license()` to register license details.
+
+#### `ham_create_asset`
+- **Purpose:** Creates a new HAM asset record.
+- **Input Schema:**
+  - `asset_tag` (string, required)
+  - `model` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "ham_create_asset",
+    "arguments": {
+      "asset_tag": "ASSET001",
+      "model": "Lenovo ThinkCentre"
+    }
+  }
+  ```
+- **Details:**  
+  Calls `create_asset()` to add a new asset.
+
+#### `ppm_create_project`
+- **Purpose:** Creates a project for portfolio management.
+- **Input Schema:**
+  - `project_name` (string, required)
+  - `owner` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "ppm_create_project",
+    "arguments": {
+      "project_name": "Website Revamp",
+      "owner": "Project_Manager_01"
+    }
+  }
+  ```
+- **Details:**  
+  Uses `create_project()` to record a new project.
+
+---
+
+### 4. Employee Experience Tools
+
+#### `ee_get_feedback`
+- **Purpose:** Retrieves employee feedback.
+- **Input Schema:**
+  - `query` (string, optional; default: "active=true")
+  - `limit` (number, optional; default: 100)
+  - `offset` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "ee_get_feedback",
+    "arguments": {
+      "query": "rating>=4",
+      "limit": 50,
+      "offset": 0
+    }
+  }
+  ```
+- **Details:**  
+  Calls `get_employee_feedback()` and returns matching feedback records.
+
+#### `ee_create_feedback`
+- **Purpose:** Creates a new employee feedback record.
+- **Input Schema:**
+  - `employee_id` (string, required)
+  - `feedback` (string, required)
+  - `rating` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "ee_create_feedback",
+    "arguments": {
+      "employee_id": "emp1001",
+      "feedback": "The new portal is very user-friendly.",
+      "rating": 5
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `create_employee_feedback()` to store the feedback.
+
+---
+
+### 5. Reporting and Analytics Tools
+
+#### `report_generate_incident`
+- **Purpose:** Generates a report of incidents.
+- **Input Schema:**
+  - `query` (string, optional)
+  - `limit` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "report_generate_incident",
+    "arguments": {
+      "query": "priority=High",
+      "limit": 100
+    }
+  }
+  ```
+- **Details:**  
+  Calls `generate_incident_report()` to return a count of incidents and their details.
+
+#### `report_generate_change`
+- **Purpose:** Generates a report of change requests.
+- **Input Schema:**
+  - `query` (string, optional)
+  - `limit` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "report_generate_change",
+    "arguments": {
+      "query": "state=approved",
+      "limit": 50
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `generate_change_report()` and returns the change report.
+
+#### `analytics_predict_trends`
+- **Purpose:** Predicts incident trends based on historical data.
+- **Input Schema:**
+  - `query` (string, optional)
+  - `limit` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "analytics_predict_trends",
+    "arguments": {
+      "query": "active=true",
+      "limit": 100
+    }
+  }
+  ```
+- **Details:**  
+  Calls `predict_incident_trends()` to provide a prediction (e.g., high vs. low trend).
+
+#### `analytics_anomaly_detection`
+- **Purpose:** Detects anomalies in incident data.
+- **Input Schema:**
+  - `query` (string, optional)
+  - `limit` (number, optional)
+- **Example:**
+
+  ```json
+  {
+    "name": "analytics_anomaly_detection",
+    "arguments": {
+      "query": "active=true",
+      "limit": 100
+    }
+  }
+  ```
+- **Details:**  
+  Invokes `anomaly_detection()` to flag unusual incident counts.
+
+---
+
+### 6. Workflow Tools
+
+#### `workflow_process_access`
+- **Purpose:**  
+  Orchestrates the multi-step access provisioning process. This process includes:
+  - **Fetching the Request Details:** Retrieves the access provisioning request (RITM) using ITSM tools.
+  - **Role Classification:** Analyzes the request to determine the required roles.
+  - **Role Identification & Assignment:** Matches the identified roles with available groups.
+  - **Approval Trigger:** Notifies relevant group managers for approval.
+  - **Role Assignment & Update:** Assigns the user to groups and updates the request.
+  - **Finalization:** Closes the request after successful access provisioning.
+- **Input Schema:**
+  - `ritm_id` (string, required)
+  - `user_id` (string, required)
+- **Example:**
+
+  ```json
+  {
+    "name": "workflow_process_access",
+    "arguments": {
+      "ritm_id": "ritm789xyz",
+      "user_id": "user123"
+    }
+  }
+  ```
+- **Details:**  
+  The tool calls `process_access_provisioning()` from the workflow module, which chains together multiple internal functions to fully automate and log each step of the access provisioning process.
+
+---
+
+## How to Invoke These Tools
+
+Each tool is invoked by sending a JSON payload that includes the tool's `name` and an `arguments` object following the tool’s input schema. For example, using an MCP client or integrating with a workflow engine like n8n, you might send:
 
 ```json
 {
   "name": "itsm_create_incident",
   "arguments": {
-    "short_description": "Unable to connect to VPN",
+    "short_description": "Unable to access internal portal",
     "caller_id": "user123",
     "priority": "High"
   }
 }
 ```
 
-The server will respond with a result containing the ServiceNow API response.
+The server processes the request and returns a JSON response containing the result, status messages, unique IDs, or error details.
+
+---
+
+## Final Summary
+
+This documentation outlines a comprehensive guide for interacting with the MCP Server for ServiceNow. Each tool is described in detail with its purpose, input parameters, usage examples, and operation details. Whether you are managing ITSM incidents, leveraging enhanced CMDB functions, processing employee feedback, generating reports, analyzing data, or orchestrating complex workflows, this MCP server provides a robust and extensible foundation.
 
 ---
 
 ## Contributing
 
-Contributions are welcome! If you wish to add more features or improve existing ones (e.g., additional modules, improved AI agent integrations, enhanced workflows), please open an issue or submit a pull request.
+Contributions are welcome! If you would like to add new features, improve existing modules, or integrate additional functionalities (e.g., enhanced AI agent integration or further CMDB enhancements), please open an issue or submit a pull request.
 
 ---
 
 ## License
 
-*(Include license information here, e.g., MIT License.)*
+*(Include your license information here, e.g., MIT License.)*
+```
 
 ---
 
-## Final Thoughts
+This README.md file contains detailed usage documentation for each function in the MCP server. You can add it directly to your GitHub repository to provide comprehensive guidance for users and contributors.
 
-This MCP Server for ServiceNow is designed to be both generic and extensible. It leverages a modular approach to handle a wide range of ServiceNow use cases, from core ITSM operations to advanced CMDB management and dynamic workflow orchestration. Whether you're integrating with AI agents, external workflow engines like n8n, or building a comprehensive dashboard for enterprise operations, this server provides a flexible foundation that you can continue to build upon.
-
-Happy coding!
-```
+Let me know if you need further modifications!
