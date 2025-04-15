@@ -38,7 +38,7 @@ This server is ideal for integrating ServiceNow with AI agents (such as those or
 
 ## Directory Structure
 
-```
+
 mcp_servicenow/
 ├── main.py                     # Entry point for the MCP server; exposes all tools via MCP
 ├── config.py                   # Configuration file for ServiceNow instance, authentication, etc.
@@ -63,7 +63,6 @@ mcp_servicenow/
 └── prompts/
     ├── __init__.py             # Package initializer for prompt templates
     └── templates.py            # Rich prompt templates for dynamic interactions with AI agents
-```
 
 ---
 
